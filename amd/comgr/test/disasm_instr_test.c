@@ -14,7 +14,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-static const int ExpectedUserData;
+// Not const: its address is handed to the disassembler as the void *user_data
+// callback argument, and casting away const to do that is a defect.
+static int ExpectedUserData;
 
 static void checkUserData(const void *UserData) {
   if (UserData != (const void *)&ExpectedUserData) {
